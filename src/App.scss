@@ -1,3 +1,31 @@
 body {
-  background-color: #dddddd;
+  // background-color: #dddddd;
 }
+
+header {
+  background-color: #ffc90e;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;  
+  
+  #logo {
+    width: 150px;
+    height: 150px;
+    background-image: url(/static/media/logo.d223aa7b.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+        
+  }
+
+  #header__text {
+    margin-right: 50px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+}
+
+
+// logo color #ffc90e

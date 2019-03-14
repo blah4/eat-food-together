@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
 import './App.scss';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import EventForm from './components/EventForm';
+import EventCard from './components/EventCard';
 
 
 class App extends Component {
   render() {
     return (
-      <div>
-
-      </div>      
+        <>
+          <header><div id="header__text"><span>Order Food together</span></div><div id="logo"></div></header>
+          <Container>
+            <Row>
+              <Col>
+                <Row><h1>Create own food event </h1></Row>
+                <Row><EventForm/></Row>
+              </Col>
+              <Col>
+                <Row><Col><h1>Join existing event</h1></Col></Row>
+                <Row><Col><EventCard/></Col></Row>
+              </Col>
+            </Row>
+          </Container>
+        </>              
     );
   }
 }
