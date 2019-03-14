@@ -15,7 +15,7 @@ class EventCard extends Component {
                     <Card.Subtitle className="mb-2 text-muted">Event name:</Card.Subtitle>
                     <Card.Title>(Event name)</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Event owner name:</Card.Subtitle>
-                    <Card.Text> (Event owner name) </Card.Text>
+                        <Card.Text> (Event owner name) </Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">Order from:</Card.Subtitle>
                     <Card.Text> (Order from) </Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">Place:</Card.Subtitle>
