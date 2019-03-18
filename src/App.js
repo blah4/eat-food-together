@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
         <>
-          <header><div id="header__text"><span>Order Food together</span></div><div id="logo"></div></header>
+          <header><div id="header__text"><span>Order Food Together</span></div><div id="logo"></div></header>
           <Container>
             <Row>
               <Col>
