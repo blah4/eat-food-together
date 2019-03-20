@@ -8,7 +8,7 @@ class EventForm extends Component {
     state = { 
         validated: false,
         eventName: '',
-        eventOwner: '',
+        organizer: '',
         orderPlace: '',
         eventPlace: '',
         eventDate: '',
@@ -27,13 +27,13 @@ class EventForm extends Component {
         event.stopPropagation();
         console.log(this.state);
         if(
-            this.state.eventName.length < 5 ||
-            this.state.eventOwner.length < 5 ||
-            this.state.orderPlace.length < 5 ||
+            //this.state.eventName.length < 5 ||
+            this.state.organizer.length < 5 ||
+            //this.state.orderPlace.length < 5 ||
             this.state.eventPlace.length < 5 ||
             this.state.eventDate.length !== 10 ||
-            this.state.eventTime.length !== 5 ||
-            this.state.ownerOrder.length < 5
+            this.state.eventTime.length !== 5 
+            //this.state.ownerOrder.length < 5
             ) {
                 this.setState({validated: false});
                 console.log('Walidacja KO!');
@@ -47,7 +47,7 @@ class EventForm extends Component {
         if(!this.state.validated) {
             return (
                 <Form onSubmit={this.handleSubmit}>                
-                    <Form.Group>
+                    {/* <Form.Group>
                         <Form.Label>Event name</Form.Label>
                         <Form.Control                         
                             type="text" 
@@ -62,18 +62,18 @@ class EventForm extends Component {
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid Event name, must have minimum 5 charakters.
                         </Form.Control.Feedback>
-                    </Form.Group>  
+                    </Form.Group>   */}
                     
                     <Form.Group>
                         <Form.Label>Event organizer name</Form.Label>
                         <Form.Control 
                             type="text" 
                             placeholder="Enter owner name"
-                            name="eventOwner" 
-                            value={this.state.eventOwner} 
+                            name="organizer" 
+                            value={this.state.organizer} 
                             onChange={this.handleInputChange}
-                            isValid={this.state.eventOwner.length >= 5}
-                            isInvalid={this.state.eventOwner.length < 5 && this.state.eventOwner.length !== 0}
+                            isValid={this.state.organizer.length >= 5}
+                            isInvalid={this.state.organizer.length < 5 && this.state.organizer.length !== 0}
                             required                        
                         />
                         <Form.Control.Feedback type="invalid">
@@ -81,8 +81,8 @@ class EventForm extends Component {
                         </Form.Control.Feedback>
                     </Form.Group>
     
-                    <Form.Group>
-                        <Form.Label>Where do you order from?</Form.Label>
+                    {/* <Form.Group>
+                        <Form.Label>Where do you Go for eating?</Form.Label>
                         <Form.Control 
                             type="text" 
                             placeholder="Enter where do you order from?" 
@@ -96,10 +96,10 @@ class EventForm extends Component {
                         <Form.Control.Feedback type="invalid">
                             Please provide info where do you order from?.
                         </Form.Control.Feedback>
-                    </Form.Group> 
+                    </Form.Group>  */}
     
                     <Form.Group controlId="formGridAddress1">
-                        <Form.Label>Where event teake place</Form.Label>
+                        <Form.Label>Where event teake place?</Form.Label>
                         <Form.Control 
                             type="text" 
                             placeholder="City Street Number/ company name" 
@@ -149,7 +149,7 @@ class EventForm extends Component {
                         </Form.Group>
                     </Row>
     
-                    <Form.Group controlId="formGridAddress1">
+                    {/* <Form.Group controlId="formGridAddress1">
                         <Form.Label>What food you order?</Form.Label>
                         <Form.Control  
                             type="text" 
@@ -164,7 +164,7 @@ class EventForm extends Component {
                         <Form.Control.Feedback type="invalid">
                             What food you order?
                         </Form.Control.Feedback>
-                    </Form.Group>
+                    </Form.Group> */}
     
                     {/* {this.state.validated ? null : <Button variant="primary" type="submit">Create</Button>} */}
                     <Button variant="primary" type="submit">Create</Button>

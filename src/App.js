@@ -5,9 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import EventForm from './components/EventForm';
-import EventCard from './components/EventCard';
+import EventsList from './components/EventsList';
 
 class App extends Component {
+
   render() {
     return (
         <>
@@ -20,7 +21,7 @@ class App extends Component {
               </Col>
               <Col>
                 <Row><Col><h1>Join existing event</h1></Col></Row>
-                <Row><Col><EventCard/></Col></Row>
+                <Row><Col><EventsList/></Col></Row>
               </Col>
             </Row>
           </Container>
