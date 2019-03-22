@@ -3,17 +3,16 @@ import Form from 'react-bootstrap/Form';
 import {Col, Row} from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import db from '../firebase/config';
+
 class EventForm extends Component {
 
     state = { 
         validated: false,
-        eventName: '',
         organizer: '',
-        orderPlace: '',
         eventPlace: '',
         eventDate: '',
-        eventTime: '',
-        ownerOrder: ''
+        eventTime: ''
     }
 
     handleInputChange = (event) => {    
@@ -27,43 +26,29 @@ class EventForm extends Component {
         event.stopPropagation();
         console.log(this.state);
         if(
-            //this.state.eventName.length < 5 ||
             this.state.organizer.length < 5 ||
-            //this.state.orderPlace.length < 5 ||
             this.state.eventPlace.length < 5 ||
             this.state.eventDate.length !== 10 ||
             this.state.eventTime.length !== 5 
-            //this.state.ownerOrder.length < 5
             ) {
                 this.setState({validated: false});
-                console.log('Walidacja KO!');
+                //console.log('Walidacja KO!');        
             } else {
                 this.setState({validated: true});
-                console.log('Walidacja Ok wysyłam formularz.'); 
+                //console.log('Walidacja Ok wysyłam formularz.'); 
+
+                db.collection('events').add({
+                    date: `${this.state.eventDate} Godz:  ${this.state.eventTime}`,
+                    eventPlace: this.state.eventPlace,
+                    organizer: this.state.organizer
+                });
             }       
     }
 
     render() {
         if(!this.state.validated) {
             return (
-                <Form onSubmit={this.handleSubmit}>                
-                    {/* <Form.Group>
-                        <Form.Label>Event name</Form.Label>
-                        <Form.Control                         
-                            type="text" 
-                            placeholder="Enter Event name" 
-                            name="eventName" 
-                            value={this.state.eventName} 
-                            onChange={this.handleInputChange} 
-                            isValid={this.state.eventName.length >= 5}
-                            isInvalid={this.state.eventName.length < 5 && this.state.eventName.length !== 0}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid Event name, must have minimum 5 charakters.
-                        </Form.Control.Feedback>
-                    </Form.Group>   */}
-                    
+                <Form onSubmit={this.handleSubmit}>                              
                     <Form.Group>
                         <Form.Label>Event organizer name</Form.Label>
                         <Form.Control 
@@ -80,24 +65,7 @@ class EventForm extends Component {
                             Please provide a valid Name.
                         </Form.Control.Feedback>
                     </Form.Group>
-    
-                    {/* <Form.Group>
-                        <Form.Label>Where do you Go for eating?</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter where do you order from?" 
-                            name="orderPlace" 
-                            value={this.state.orderPlace} 
-                            onChange={this.handleInputChange}
-                            isValid={this.state.orderPlace.length >= 5}
-                            isInvalid={this.state.orderPlace.length < 5 && this.state.orderPlace.length !== 0}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please provide info where do you order from?.
-                        </Form.Control.Feedback>
-                    </Form.Group>  */}
-    
+
                     <Form.Group controlId="formGridAddress1">
                         <Form.Label>Where event teake place?</Form.Label>
                         <Form.Control 
@@ -128,9 +96,6 @@ class EventForm extends Component {
                                 isValid={this.state.eventDate.length === 10}
                                 required
                             />
-                            <Form.Control.Feedback  type="invalid">
-                                Invalid Date
-                            </Form.Control.Feedback>
                         </Form.Group>
     
                         <Form.Group as={Col} controlId="time">
@@ -143,30 +108,8 @@ class EventForm extends Component {
                                 isValid={this.state.eventTime.length === 5}
                                 required
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Invalid Tiem
-                            </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
-    
-                    {/* <Form.Group controlId="formGridAddress1">
-                        <Form.Label>What food you order?</Form.Label>
-                        <Form.Control  
-                            type="text" 
-                            placeholder="Enter food" 
-                            name="ownerOrder" 
-                            value={this.state.ownerOrder} 
-                            onChange={this.handleInputChange}
-                            isValid={this.state.ownerOrder.length >= 5}
-                            isInvalid={this.state.ownerOrder.length < 5 && this.state.ownerOrder.length !== 0}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            What food you order?
-                        </Form.Control.Feedback>
-                    </Form.Group> */}
-    
-                    {/* {this.state.validated ? null : <Button variant="primary" type="submit">Create</Button>} */}
                     <Button variant="primary" type="submit">Create</Button>
                 </Form>
             )

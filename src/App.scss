@@ -1,4 +1,10 @@
 @import './styles/header';
+@import './styles/footer';
+@import './styles/nav';
+
+html {
+    scroll-behavior: smooth;
+}
 
 li {
     list-style: none;
