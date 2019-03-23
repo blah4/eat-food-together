@@ -37,10 +37,11 @@ class EventForm extends Component {
                 this.setState({validated: true});
                 //console.log('Walidacja Ok wysyłam formularz.'); 
 
-                db.collection('events').add({
+                db.collection('events').add({ 
                     date: `${this.state.eventDate} Godz:  ${this.state.eventTime}`,
                     eventPlace: this.state.eventPlace,
-                    organizer: this.state.organizer
+                    organizer: this.state.organizer,
+                    participates: [this.state.organizer]
                 });
             }       
     }

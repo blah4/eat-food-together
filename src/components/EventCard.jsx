@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-// import ListGroup from 'react-bootstrap/ListGroup';
-// import ListGroupItem from 'react-bootstrap/ListGroupItem';
+import ListGroup from 'react-bootstrap/ListGroup';
+//import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
+import db from '../firebase/config';
+import JoinModal from './JoinModal';
 
 class EventCard extends Component {
+
+    handleDelete = (e, joinID) => {
+        db.collection('events').doc(joinID).delete();
+    }
 
     render() {
         return(
@@ -23,17 +29,20 @@ class EventCard extends Component {
                     <Card.Subtitle className="mb-2 text-muted">Event starts:</Card.Subtitle>
                     <Card.Text>{this.props.date}</Card.Text>
                                         
-                    {/* <Card.Body>
+                    <Card.Body>
                         <Card.Subtitle className="mb-2 text-muted">Participants:</Card.Subtitle>
                         <ListGroup className="list-group-flush">
-                            <ListGroupItem>Maciej Gjodo</ListGroupItem>
-                            <ListGroupItem>Anna Baker</ListGroupItem>
-                            <ListGroupItem>Simon Ses</ListGroupItem>
+                            {this.props.participates.map((participate, index) => 
+                                <ListGroup.Item key={index}>{participate}</ListGroup.Item>
+                            )}
                         </ListGroup>
-                    </Card.Body> */}
+                    </Card.Body>
                                 
                     <Card.Body>
-                        <Button variant="primary">Join</Button>
+                        <JoinModal joinID={this.props.joinID}/>
+                        <Button variant="secondary" onClick={(e) => this.handleDelete(e, this.props.joinID)}>
+                            Delete
+                        </Button>
                     </Card.Body>
                     
                 </Card.Body>
