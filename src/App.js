@@ -9,29 +9,31 @@ import Header from './components/Header';
 import FormEvent from './components/FormEvent';
 import ListEvents from './components/ListEvent';
 import Navigation from './components/Navigation'; 
-import TestContextComponent from './components/TestContextComponent';
+// import TestContextComponent from './components/TestContextComponent';
 
 class App extends Component {
 
+  state = {
+    activeTab: 'create'
+  }
+
   render() {
     return (
-      <>
-        <RenderContextProvider>
-        <Router>
-          <div>
+      <Router>
+          <>
             <Header/>
             <Container>
-              <Navigation />
-                  <Route exact path="/" component={FormEvent} />
-                  <Route path="/events/" component={ListEvents} />
-                  <Route path="/create" component={FormEvent} />
-            </Container>
-          </div>
-        </Router>
+              <Navigation activeTab={this.state.activeTab}/>
+              <Route exact path="/" component={FormEvent}/>
+              <Route path="/events/" component={() => <ListEvents activeTab={this.state.activeTab}/>}/>
+              <Route path="/create" component={FormEvent}/>
+            </Container>         
         
-          {/* <TestContextComponent/> */}
-        </RenderContextProvider>
-      </>              
+          <RenderContextProvider>
+            {/* <TestContextComponent/> */}
+          </RenderContextProvider>
+        </>
+      </Router>             
     );
   }
 }

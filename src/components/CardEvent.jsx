@@ -8,10 +8,6 @@ import DeleteModal from './DeleteModal';
 
 class CardEvent extends Component {
 
-    // handleDelete = (e, joinID) => {
-    //     db.collection('events').doc(joinID).delete();
-    // }
-
     render() {
         return(
             <Card>

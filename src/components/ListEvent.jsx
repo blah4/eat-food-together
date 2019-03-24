@@ -6,7 +6,8 @@ import EventCard from './CardEvent';
 class ListEvents extends Component {
 
     state = {
-        eventsList: []
+        eventsList: [],
+        activeTab: this.props.activeTab
     }
 
     componentDidMount() {
@@ -14,7 +15,8 @@ class ListEvents extends Component {
             snapshot.docs.forEach(doc => {
                 let li = 
                 <li key={doc.id} id={doc.id}> 
-                    <EventCard 
+                    <EventCard
+                        activCard={this.state.activCard} 
                         eventName={doc.data().eventName}
                         date={doc.data().date}
                         eventPlace={doc.data().eventPlace}
@@ -23,13 +25,13 @@ class ListEvents extends Component {
                         participates={doc.data().participates}
                     />
                 </li>
-                this.setState((prevState) => ({ eventsList: [...prevState.eventsList, li] }));
+                this.setState((prevState) => ({ eventsList: [...prevState.eventsList, li], activeTab: 'join' }));
+                console.log(this.state.activeTab);
             });
         });
     }
 
     render() {
-
         if (this.state.eventsList.length === 0) {
             return (
                 <>
