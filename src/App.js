@@ -4,33 +4,34 @@ import Container from 'react-bootstrap/Container';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
-
-import EventForm from './components/EventForm';
-import EventsList from './components/EventsList';
+import {RenderContextProvider} from './context';
+import Header from './components/Header';
+import Welcome from './components/Welcome';
+import FormEvent from './components/FormEvent';
+import ListEvents from './components/ListEvent';
 import Navigation from './components/Navigation'; 
+import TestContextComponent from './components/TestContextComponent';
 
 class App extends Component {
 
   render() {
     return (
-        <>
-            <Router>
-            <div>           
-
-          <header><div id="header__text"><span>Order Food Together</span></div><div id="logo"></div></header>
-          <Container> 
-            <Navigation/>
-            {/* <h1 id='event-list'>Events</h1> */}
-            <Route path="/events/" component={EventsList}/>
-            {/* <h1 id='event-form'>Create own food event </h1> */}
-            <Route path="/create/" component={EventForm}/> 
-          </Container>
-          {/* <footer><h3>Maciej B. All rights reserved </h3></footer> */}
+      <>
+        <Router>
+          <div>
+            <Header/>
+            <Container>
+              <Navigation />
+                  <Route exact path="/" component={Welcome} />
+                  <Route path="/events/" component={ListEvents} />
+                  <Route path="/create/" component={FormEvent} />
+            </Container>
           </div>
-
-          </Router>              
-
-        </>              
+        </Router>
+        <RenderContextProvider>
+          <TestContextComponent/>
+        </RenderContextProvider>
+      </>              
     );
   }
 }

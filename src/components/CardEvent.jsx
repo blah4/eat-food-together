@@ -7,7 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import db from '../firebase/config';
 import JoinModal from './JoinModal';
 
-class EventCard extends Component {
+class CardEvent extends Component {
 
     handleDelete = (e, joinID) => {
         db.collection('events').doc(joinID).delete();
@@ -18,6 +18,7 @@ class EventCard extends Component {
             <Card>
                 {/* <Card.Img variant="top" src="./img/veeterzy.jpg" /> */}
                 <Card.Body>
+                    <Card.Title>{this.props.eventName}</Card.Title>
                     {/* <Card.Subtitle className="mb-2 text-muted">Event name:</Card.Subtitle>
                     <Card.Title>{this.props.eventName}</Card.Title> */}
                     <Card.Subtitle className="mb-2 text-muted">Event organizer name:</Card.Subtitle>
@@ -51,4 +52,4 @@ class EventCard extends Component {
     }
 }
 
-export default EventCard;
+export default CardEvent;

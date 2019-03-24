@@ -23,14 +23,14 @@ class JoinModal extends Component {
     }
 
     handleSave = (e, joinID) => {
-        if(this.state.name.length >= 5) {
+        if(this.state.name.length >= 3) {
             this.setState({ show: false });
-            //console.log(this.state.name);
+            console.log(this.state.name);
             db.collection('events').doc(joinID).update(
               { participates: firebase.firestore.FieldValue.arrayUnion(`${this.state.name} Will eat: ${this.state.food}`) }
             );
         }
-        window.location.reload()
+        // window.location.reload()
     }
 
     handleChange = (event) => {
@@ -59,8 +59,8 @@ class JoinModal extends Component {
                       name="name"
                       value={this.state.neme} 
                       onChange={this.handleChange} 
-                      isValid={this.state.name.length >= 5}
-                      isInvalid={this.state.name.length < 5 && this.state.name.length !== 0}
+                      isValid={this.state.name.length >= 3}
+                      isInvalid={this.state.name.length < 3 && this.state.name.length !== 0}
                       required 
 
                   />
@@ -74,7 +74,7 @@ class JoinModal extends Component {
                       value={this.state.food} 
                       onChange={this.handleChange} 
                       isValid={this.state.food.length >= 5}
-                      isInvalid={this.state.food.length < 5 && this.state.food.length !== 0}
+                      isInvalid={this.state.food.length <= 5 && this.state.food.length !== 0}
                       required 
                   />
                 </Form.Group>
