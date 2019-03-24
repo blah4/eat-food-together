@@ -5,7 +5,7 @@ const RenderContext = React.createContext();
 export  class RenderContextProvider extends React.Component {
 
     state = {
-        test: 'testowy tekst '
+        refresh: false
     }
 
     render() {

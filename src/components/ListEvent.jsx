@@ -33,7 +33,7 @@ class ListEvents extends Component {
         if (this.state.eventsList.length === 0) {
             return (
                 <>
-                    <h1 id='event-list'>Events</h1>
+                    <h1 id='event-list'>OOOPSSS!!</h1>
                     <h2>There is no Food events you need too create one.</h2>
                     <h3>Go to Create Event Cadr</h3>
                 </>

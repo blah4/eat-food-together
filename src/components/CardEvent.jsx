@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 //import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
-import db from '../firebase/config';
 import JoinModal from './JoinModal';
+import DeleteModal from './DeleteModal';
 
 class CardEvent extends Component {
 
-    handleDelete = (e, joinID) => {
-        db.collection('events').doc(joinID).delete();
-    }
+    // handleDelete = (e, joinID) => {
+    //     db.collection('events').doc(joinID).delete();
+    // }
 
     render() {
         return(
@@ -41,9 +40,10 @@ class CardEvent extends Component {
                                 
                     <Card.Body>
                         <JoinModal joinID={this.props.joinID}/>
-                        <Button variant="secondary" onClick={(e) => this.handleDelete(e, this.props.joinID)}>
+                        {/* <Button variant="secondary" onClick={(e) => this.handleDelete(e, this.props.joinID)}>
                             Delete
-                        </Button>
+                        </Button> */}
+                        <DeleteModal joinID={this.props.joinID}/>
                     </Card.Body>
                     
                 </Card.Body>

@@ -6,10 +6,10 @@ class Navigation extends Component {
 
     render() {
         return(
-            <Nav fill variant="tabs" defaultActiveKey="/events">
+            <Nav fill variant="tabs" defaultActiveKey="create">
                 <Nav.Item>
                     <Link to="/create">
-                    <Nav.Link eventKey="create" as="div">Create Evant</Nav.Link>
+                        <Nav.Link eventKey="create" as="div">Create Evant</Nav.Link>
                     </Link>
                 </Nav.Item>
                 <Nav.Item>

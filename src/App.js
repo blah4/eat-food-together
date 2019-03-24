@@ -6,7 +6,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 // import Col from 'react-bootstrap/Col';
 import {RenderContextProvider} from './context';
 import Header from './components/Header';
-import Welcome from './components/Welcome';
 import FormEvent from './components/FormEvent';
 import ListEvents from './components/ListEvent';
 import Navigation from './components/Navigation'; 
@@ -17,19 +16,20 @@ class App extends Component {
   render() {
     return (
       <>
+        <RenderContextProvider>
         <Router>
           <div>
             <Header/>
             <Container>
               <Navigation />
-                  <Route exact path="/" component={Welcome} />
+                  <Route exact path="/" component={FormEvent} />
                   <Route path="/events/" component={ListEvents} />
-                  <Route path="/create/" component={FormEvent} />
+                  <Route path="/create" component={FormEvent} />
             </Container>
           </div>
         </Router>
-        <RenderContextProvider>
-          <TestContextComponent/>
+        
+          {/* <TestContextComponent/> */}
         </RenderContextProvider>
       </>              
     );

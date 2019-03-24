@@ -6,7 +6,7 @@ class TestContextComponent extends Component {
         return (
             <RenderContextConsumer>
                 {context => (
-                    <h1>{null}</h1>
+                    <h1>{context}</h1>
                 )}
             </RenderContextConsumer>
         )

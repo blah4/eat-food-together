@@ -25,7 +25,7 @@ class JoinModal extends Component {
     handleSave = (e, joinID) => {
         if(this.state.name.length >= 3) {
             this.setState({ show: false });
-            console.log(this.state.name);
+            //console.log(this.state.name);
             db.collection('events').doc(joinID).update(
               { participates: firebase.firestore.FieldValue.arrayUnion(`${this.state.name} Will eat: ${this.state.food}`) }
             );
