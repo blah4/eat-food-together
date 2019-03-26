@@ -22,7 +22,7 @@ class DeleteEvent extends Component {
     handleDelete = (e, joinID, test) => {
       this.setState({ show: false });
       db.collection('events').doc(joinID).delete();
-      // test();
+      this.props.deleteEvent(joinID);
     }
 
     render() {

@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import setActiveCard from '../hepers/setActiveCard';
 import Button from 'react-bootstrap/Button';
 
 import db from '../firebase/config';

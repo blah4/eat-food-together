@@ -10,36 +10,38 @@ class CardEvent extends Component {
 
     render() {
         return(
-            <Card>
-                {/* <Card.Img variant="top" src="./img/veeterzy.jpg" /> */}
-                <Card.Body>
-                    <Card.Title>{this.props.eventName}</Card.Title>
-                    {/* <Card.Subtitle className="mb-2 text-muted">Event name:</Card.Subtitle>
-                    <Card.Title>{this.props.eventName}</Card.Title> */}
-                    <Card.Subtitle className="mb-2 text-muted">Event organizer name:</Card.Subtitle>
-                        <Card.Text>{this.props.organizer}</Card.Text>
-                    {/* <Card.Subtitle className="mb-2 text-muted">Order from:</Card.Subtitle>
-                    <Card.Text>{this.props.orderPlace}</Card.Text> */}
-                    <Card.Subtitle className="mb-2 text-muted">Place:</Card.Subtitle>
-                    <Card.Text>{this.props.eventPlace}</Card.Text>
-                    <Card.Subtitle className="mb-2 text-muted">Event starts:</Card.Subtitle>
-                    <Card.Text>{this.props.date}</Card.Text>
-                                        
+            <li id={this.props.uniqueKey}>
+                <Card>
+                    {/* <Card.Img variant="top" src="./img/veeterzy.jpg" /> */}
                     <Card.Body>
-                        <Card.Subtitle className="mb-2 text-muted">Participants:</Card.Subtitle>
-                        <ListGroup className="list-group-flush">
-                            {this.props.participates.map((participate, index) => 
-                                <ListGroup.Item key={index}>{participate}</ListGroup.Item>
-                            )}
-                        </ListGroup>
+                        <Card.Title>{this.props.eventName}</Card.Title>
+                        {/* <Card.Subtitle className="mb-2 text-muted">Event name:</Card.Subtitle>
+                        <Card.Title>{this.props.eventName}</Card.Title> */}
+                        <Card.Subtitle className="mb-2 text-muted">Event organizer name:</Card.Subtitle>
+                            <Card.Text>{this.props.organizer}</Card.Text>
+                        {/* <Card.Subtitle className="mb-2 text-muted">Order from:</Card.Subtitle>
+                        <Card.Text>{this.props.orderPlace}</Card.Text> */}
+                        <Card.Subtitle className="mb-2 text-muted">Place:</Card.Subtitle>
+                        <Card.Text>{this.props.eventPlace}</Card.Text>
+                        <Card.Subtitle className="mb-2 text-muted">Event starts:</Card.Subtitle>
+                        <Card.Text>{this.props.date}</Card.Text>
+                                            
+                        <Card.Body>
+                            <Card.Subtitle className="mb-2 text-muted">Participants:</Card.Subtitle>
+                            <ListGroup className="list-group-flush">
+                                {this.props.participates.map((participate, index) => 
+                                    <ListGroup.Item key={index}>{participate}</ListGroup.Item>
+                                    )}
+                            </ListGroup>
+                        </Card.Body>
+                                    
+                        <Card.Body>
+                            <JoinModal joinID={this.props.joinID} />
+                            <DeleteModal joinID={this.props.joinID} deleteEvent={this.props.deleteEvent}/>
+                        </Card.Body>                   
                     </Card.Body>
-                                
-                    <Card.Body>
-                        <JoinModal joinID={this.props.joinID}/>
-                        <DeleteModal joinID={this.props.joinID}/>
-                    </Card.Body>                   
-                </Card.Body>
-            </Card>
+                </Card>
+            </li>
         )
     }
 }
