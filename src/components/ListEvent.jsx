@@ -6,8 +6,7 @@ import EventCard from './CardEvent';
 class ListEvents extends Component {
 
     state = {
-        eventsList: [],
-        activeTab: this.props.activeTab
+        eventsList: []
     }
 
     componentDidMount() {
@@ -25,13 +24,13 @@ class ListEvents extends Component {
                         participates={doc.data().participates}
                     />
                 </li>
-                this.setState((prevState) => ({ eventsList: [...prevState.eventsList, li], activeTab: 'join' }));
-                console.log(this.state.activeTab);
+                this.setState((prevState) => ({ eventsList: [...prevState.eventsList, li] }));
             });
         });
     }
 
     render() {
+        console.log(this.state.eventsList);
         if (this.state.eventsList.length === 0) {
             return (
                 <>

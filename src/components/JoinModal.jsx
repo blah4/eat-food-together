@@ -28,7 +28,7 @@ class JoinModal extends Component {
           this.setState({ show: false });
           //console.log(this.state.name);
           db.collection('events').doc(joinID).update(
-            { participates: firebase.firestore.FieldValue.arrayUnion(`${this.state.name} Will eat: ${this.state.food}`) }
+            { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
           );
       }
       // window.location.reload()

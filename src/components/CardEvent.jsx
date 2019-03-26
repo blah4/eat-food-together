@@ -36,12 +36,8 @@ class CardEvent extends Component {
                                 
                     <Card.Body>
                         <JoinModal joinID={this.props.joinID}/>
-                        {/* <Button variant="secondary" onClick={(e) => this.handleDelete(e, this.props.joinID)}>
-                            Delete
-                        </Button> */}
                         <DeleteModal joinID={this.props.joinID}/>
-                    </Card.Body>
-                    
+                    </Card.Body>                   
                 </Card.Body>
             </Card>
         )

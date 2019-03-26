@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
-import {RenderContextProvider} from './context';
+import {ContextProvider} from './context';
 import Header from './components/Header';
 import FormEvent from './components/FormEvent';
 import ListEvents from './components/ListEvent';
@@ -13,25 +13,21 @@ import Navigation from './components/Navigation';
 
 class App extends Component {
 
-  state = {
-    activeTab: 'create'
-  }
-
   render() {
     return (
       <Router>
           <>
+          <ContextProvider>
             <Header/>
             <Container>
-              <Navigation activeTab={this.state.activeTab}/>
-              <Route exact path="/" component={FormEvent}/>
-              <Route path="/events/" component={() => <ListEvents activeTab={this.state.activeTab}/>}/>
+              <Navigation activeTab=""/>
+              <Route exact path="/" component={ListEvents}/>
+              <Route path="/events/" component={ListEvents}/>
               <Route path="/create" component={FormEvent}/>
-            </Container>         
+            </Container>    
         
-          <RenderContextProvider>
             {/* <TestContextComponent/> */}
-          </RenderContextProvider>
+          </ContextProvider>
         </>
       </Router>             
     );

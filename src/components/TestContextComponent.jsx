@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import {RenderContextConsumer} from '../context';
+import {ContextConsumer} from '../context';
 
 class TestContextComponent extends Component {
     render() {
         return (
-            <RenderContextConsumer>
+            <ContextConsumer>
                 {context => (
                     <h1>{context}</h1>
                 )}
-            </RenderContextConsumer>
+            </ContextConsumer>
         )
     }
 }

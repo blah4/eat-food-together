@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import setActiveCard from '../hepers/setActiveCard';
-import Form from 'react-bootstrap/Form';
-import {Col, Row} from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import db from '../firebase/config';
@@ -14,6 +15,7 @@ class FormEvent extends Component {
         validated: false,
         redirect: false,
         eventName: '',
+        food: '',
         organizer: '',
         eventPlace: '',
         eventDate: '',
@@ -22,6 +24,7 @@ class FormEvent extends Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
+            // setActiveCard(); // change nav vard. 
           return <Redirect to='/events/' />
         }
     }
@@ -40,7 +43,8 @@ class FormEvent extends Component {
             this.state.organizer.length < 5 ||
             this.state.eventPlace.length < 5 ||
             this.state.eventDate.length !== 10 ||
-            this.state.eventTime.length !== 5  
+            this.state.eventTime.length !== 5  ||
+            this.state.food.length < 5
             ) {
                 this.setState({validated: false});       
             } else {
@@ -51,9 +55,8 @@ class FormEvent extends Component {
                     date: `${this.state.eventDate} Godz:  ${this.state.eventTime}`,
                     eventPlace: this.state.eventPlace,
                     organizer: this.state.organizer,
-                    participates: [this.state.organizer]
+                    participates: [`Organizer ${this.state.organizer} will eat ${this.state.food}`]
                 });
-                setActiveCard(); // change nav vard. 
             }       
     }
 
@@ -78,25 +81,42 @@ class FormEvent extends Component {
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid Event Name. Min 5 characters.
                         </Form.Control.Feedback>
-                    </Form.Group> 
-
-                    <Form.Group>
-                        <Form.Label>Event organizer name</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Enter owner name"
-                            name="organizer" 
-                            value={this.state.organizer} 
-                            onChange={this.handleInputChange}
-                            isValid={this.state.organizer.length >= 5}
-                            isInvalid={this.state.organizer.length < 5 && this.state.organizer.length !== 0}
-                            required                        
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid Name. Min 5 characters.
-                        </Form.Control.Feedback>
                     </Form.Group>
-
+                    <Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>Event organizer name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter owner name"
+                                name="organizer" 
+                                value={this.state.organizer} 
+                                onChange={this.handleInputChange}
+                                isValid={this.state.organizer.length >= 5}
+                                isInvalid={this.state.organizer.length < 5 && this.state.organizer.length !== 0}
+                                required                        
+                                />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid Name. Min 5 characters.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    
+                        <Form.Group  as={Col}>
+                            <Form.Label>What you Will Eat?</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter your food"
+                                name="food" 
+                                value={this.state.food} 
+                                onChange={this.handleInputChange}
+                                isValid={this.state.food.length >= 5}
+                                isInvalid={this.state.food.length < 5 && this.state.food.length !== 0}
+                                required                        
+                                />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid Name. Min 5 characters.
+                            </Form.Control.Feedback>
+                        </Form.Group>                       
+                    </Row>
                     <Form.Group controlId="formGridAddress1">
                         <Form.Label>Where event teake place?</Form.Label>
                         <Form.Control 

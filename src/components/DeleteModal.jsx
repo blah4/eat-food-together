@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import db from '../firebase/config';
 
+import { ContextConsumer } from '../context';
+
 class DeleteEvent extends Component {
 
     state = {
@@ -17,13 +19,16 @@ class DeleteEvent extends Component {
         this.setState({ show: true });
     }
 
-    handleDelete = (e, joinID) => {
-        this.setState({ show: false });
-        db.collection('events').doc(joinID).delete();
+    handleDelete = (e, joinID, test) => {
+      this.setState({ show: false });
+      db.collection('events').doc(joinID).delete();
+      // test();
     }
 
     render() {
         return (
+          <ContextConsumer>
+          {(context) => (
             <>
             <Button variant="secondary" onClick={this.handleShow}>
               Delete
@@ -40,12 +45,14 @@ class DeleteEvent extends Component {
               <Button variant="secondary" onClick={this.handleClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={(e) => this.handleDelete(e, this.props.joinID)}>
+                <Button variant="primary" onClick={(e) => this.handleDelete(e, this.props.joinID, context.changeState)}>
                     Delete
                 </Button>
               </Modal.Footer>
             </Modal>
           </>
+          )}
+          </ContextConsumer>
         )
     }
 }
