@@ -22,16 +22,14 @@ class JoinModal extends Component {
       this.setState({ show: true });
     }
 
-    handleSave = (e, joinID) => {
-      this.setState({ activCard: 'join' })
+    handleSave = (e, eventId) => {
       if(this.state.name.length >= 3) {
-          this.setState({ show: false });
-          //console.log(this.state.name);
-          db.collection('events').doc(joinID).update(
-            { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
-          );
-      }
-      // window.location.reload()
+        this.setState({ show: false });
+        db.collection('events').doc(eventId).update(
+          { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
+        );
+        this.props.addMember(eventId, this.state.name, this.state.food);
+      }      
     }
 
     handleChange = (event) => {
@@ -81,7 +79,7 @@ class JoinModal extends Component {
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" onClick={(e) => this.handleSave(e, this.props.joinID)}>
+              <Button variant="primary" onClick={(e) => this.handleSave(e, this.props.eventId)}>
                 Save Changes
               </Button>
             </Modal.Footer>

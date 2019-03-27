@@ -13,12 +13,11 @@ class ListEvents extends Component {
         db.collection('events').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 const singleEvent = {
-                    uniqueKey: doc.id,
                     eventName: doc.data().eventName,
                     date: doc.data().date,
                     eventPlace: doc.data().eventPlace,
                     organizer: doc.data().organizer,
-                    joinID: doc.id,
+                    eventId: doc.id,
                     participates: doc.data().participates
                 }
                 this.setState((prevState) => ({ eventsList: [...prevState.eventsList, singleEvent] }));
@@ -26,20 +25,35 @@ class ListEvents extends Component {
         });
     }
 
-    deleteEvent = (uniqueKey) => { 
-        let newState = this.state.eventsList;
-        console.log(this.state.eventsList);      
+    deleteEvent = (eventId) => { 
+        let newState = this.state.eventsList;    
         let index = null;
         this.state.eventsList.forEach((el, i) => {
-            //console.log(el.uniqueKey, uniqueKey, i);
-            if( el.uniqueKey === uniqueKey) {
+            if( el.eventId === eventId) {
                 index=i;
             }       
         });
         if (index > -1) {
             newState.splice(index, 1);
         }
-        this.setState({eventsList: newState});
+        this.setState({eventsList: newState});    
+    }
+
+    addMember = (eventId, name, food) => {
+        const singleEvent = this.state.eventsList.find((el) => el.eventId === eventId);
+        singleEvent.participates.push(`Member ${name} will eat ${food}`);        
+        
+        let newState = this.state.eventsList;
+        let index = null;
+        this.state.eventsList.forEach((el, i) => {
+            if( el.eventId === eventId) {
+                index=i;
+            }    
+        });
+        if (index > -1) {
+            newState.splice(index, 1, singleEvent);
+        }
+        this.setState(() => ({eventsList: newState}));   
     }
     
     render() {
@@ -59,14 +73,14 @@ class ListEvents extends Component {
                     <ul>
                         {this.state.eventsList.map(singleEvent => (
                             <CardEvent
+                                eventId={singleEvent.eventId}
+                                addMember={this.addMember}
                                 deleteEvent={this.deleteEvent}
-                                key={singleEvent.uniqueKey}
-                                uniqueKey={singleEvent.uniqueKey}
+                                key={singleEvent.eventId}
                                 eventName={singleEvent.eventName}
                                 date={singleEvent.date}
                                 eventPlace={singleEvent.eventPlace}
                                 organizer={singleEvent.organizer}
-                                joinID={singleEvent.joinID}
                                 participates={singleEvent.participates}
                             />
                         ))}

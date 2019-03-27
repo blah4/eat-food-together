@@ -36,8 +36,8 @@ class CardEvent extends Component {
                         </Card.Body>
                                     
                         <Card.Body>
-                            <JoinModal joinID={this.props.joinID} />
-                            <DeleteModal joinID={this.props.joinID} deleteEvent={this.props.deleteEvent}/>
+                            <JoinModal eventId={this.props.eventId} addMember={this.props.addMember} />
+                            <DeleteModal eventId={this.props.eventId} deleteEvent={this.props.deleteEvent}/>
                         </Card.Body>                   
                     </Card.Body>
                 </Card>

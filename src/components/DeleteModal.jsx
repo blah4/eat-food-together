@@ -19,10 +19,10 @@ class DeleteEvent extends Component {
         this.setState({ show: true });
     }
 
-    handleDelete = (e, joinID, test) => {
+    handleDelete = (e, eventId) => {
       this.setState({ show: false });
-      db.collection('events').doc(joinID).delete();
-      this.props.deleteEvent(joinID);
+      db.collection('events').doc(eventId).delete();
+      this.props.deleteEvent(eventId);
     }
 
     render() {
@@ -45,7 +45,7 @@ class DeleteEvent extends Component {
               <Button variant="secondary" onClick={this.handleClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={(e) => this.handleDelete(e, this.props.joinID, context.changeState)}>
+                <Button variant="primary" onClick={(e) => this.handleDelete(e, this.props.eventId)}>
                     Delete
                 </Button>
               </Modal.Footer>
