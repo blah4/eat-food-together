@@ -8,7 +8,25 @@ import DeleteModal from './DeleteModal';
 
 class CardEvent extends Component {
 
+    state={
+        timeToEndEvent: this.props.timeStamp - new Date().getTime()
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.setState(prevState => ({timeToEndEvent: prevState.timeToEndEvent - 1000}))
+            if(this.state.timeToEndEvent < 0) {
+                this.props.deleteEvent(this.props.eventId);  
+            } 
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+    
     render() {
+        console.log(this.state.timeToEndEvent);
         return(
             <li id={this.props.uniqueKey}>
                 <Card>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import db from '../firebase/config';
 
 import { ContextConsumer } from '../context';
 
@@ -21,7 +20,6 @@ class DeleteEvent extends Component {
 
     handleDelete = (e, eventId) => {
       this.setState({ show: false });
-      db.collection('events').doc(eventId).delete();
       this.props.deleteEvent(eventId);
     }
 

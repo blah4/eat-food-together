@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import * as firebase from 'firebase';
-
-import db from '../firebase/config';
 
 class JoinModal extends Component {
     state = {
@@ -25,9 +22,6 @@ class JoinModal extends Component {
     handleSave = (e, eventId) => {
       if(this.state.name.length >= 3) {
         this.setState({ show: false });
-        db.collection('events').doc(eventId).update(
-          { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
-        );
         this.props.addMember(eventId, this.state.name, this.state.food);
       }      
     }

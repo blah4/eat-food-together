@@ -50,8 +50,6 @@ class FormEvent extends Component {
             } else {
                 this.setState({validated: true, redirect: true}); 
 
-                let timeSum = new Date();
-
                 db.collection('events').add({ 
                     eventName: this.state.eventName,
                     date: this.state.eventDate,

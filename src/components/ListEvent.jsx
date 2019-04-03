@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
+import * as firebase from 'firebase';
 import db from '../firebase/config';
+
 import CardEvent from './CardEvent';
 
 class ListEvents extends Component {
@@ -32,6 +33,8 @@ class ListEvents extends Component {
     }
 
     deleteEvent = (eventId) => { 
+        db.collection('events').doc(eventId).delete();
+
         let newState = this.state.eventsList;    
         let index = null;
         this.state.eventsList.forEach((el, i) => {
@@ -46,6 +49,10 @@ class ListEvents extends Component {
     }
 
     addMember = (eventId, name, food) => {
+        db.collection('events').doc(eventId).update(
+            { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
+          );
+
         const singleEvent = this.state.eventsList.find((el) => el.eventId === eventId);
         singleEvent.participates.push(`Member ${name} will eat ${food}`);        
         
@@ -88,6 +95,7 @@ class ListEvents extends Component {
                                 eventPlace={singleEvent.eventPlace}
                                 organizer={singleEvent.organizer}
                                 participates={singleEvent.participates}
+                                timeStamp={singleEvent.timeStamp}
                             />
                         ))}
                     </ul>
