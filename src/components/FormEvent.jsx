@@ -3,10 +3,11 @@ import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import db from '../firebase/config';
 
 import Button from 'react-bootstrap/Button';
+//import setActiveCard from '../hepers/setActiveCard';
 
-import db from '../firebase/config';
 
 class FormEvent extends Component {
 
@@ -23,8 +24,8 @@ class FormEvent extends Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            // setActiveCard(); // change nav vard. 
-          return <Redirect to='/events/' />
+            //setActiveCard(); // change nav vard. 
+          return <Redirect to='/events/'/>
         }
     }
 
@@ -49,17 +50,28 @@ class FormEvent extends Component {
             } else {
                 this.setState({validated: true, redirect: true}); 
 
+                let timeSum = new Date();
+
                 db.collection('events').add({ 
                     eventName: this.state.eventName,
-                    date: `${this.state.eventDate} Godz:  ${this.state.eventTime}`,
+                    date: this.state.eventDate,
+                    time: this.state.eventTime,
                     eventPlace: this.state.eventPlace,
                     organizer: this.state.organizer,
-                    participates: [`Organizer ${this.state.organizer} will eat ${this.state.food}`]
+                    participates: [`Organizer ${this.state.organizer} will eat ${this.state.food}`],
+                    timeStamp: new Date(`${this.state.eventDate} ${this.state.eventTime}`).getTime()
                 });
             }       
     }
 
     render() {
+        const year = new Date().getFullYear();
+        const mounth = parseInt(new Date().getMonth() + 1 );
+        const mounthOnTwoSigns = mounth < 10 ? `0${mounth}`: mounth;
+        const day= new Date().getDate();
+        const dayOnTwoSigns =  day < 10 ? `0${day}` : day;
+        const currentDate = `${year}-${mounthOnTwoSigns}-${dayOnTwoSigns}`;
+        const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
         return (
             <>
                 {this.renderRedirect()}
@@ -137,7 +149,8 @@ class FormEvent extends Component {
                     <Row>
                         <Form.Group as={Col} controlId="date">
                             <Form.Label>Date</Form.Label>
-                            <Form.Control  
+                            <Form.Control
+                                min={currentDate} 
                                 type="date" 
                                 placeholder="dd-mm-rrrr" 
                                 name="eventDate" 
@@ -150,7 +163,8 @@ class FormEvent extends Component {
     
                         <Form.Group as={Col} controlId="time">
                             <Form.Label>Time</Form.Label>
-                            <Form.Control 
+                            <Form.Control
+                                min={this.state.eventDate === currentDate ? time : null}
                                 type="time" 
                                 placeholder="hh:mm" 
                                 name="eventTime" value={this.state.eventTime} 

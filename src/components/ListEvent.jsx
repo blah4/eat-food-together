@@ -10,18 +10,24 @@ class ListEvents extends Component {
     }
 
     componentDidMount() {
+        let events = [];
         db.collection('events').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 const singleEvent = {
                     eventName: doc.data().eventName,
                     date: doc.data().date,
+                    time: doc.data().time,
                     eventPlace: doc.data().eventPlace,
                     organizer: doc.data().organizer,
                     eventId: doc.id,
-                    participates: doc.data().participates
+                    participates: doc.data().participates,
+                    timeStamp: doc.data().timeStamp
                 }
-                this.setState((prevState) => ({ eventsList: [...prevState.eventsList, singleEvent] }));
+                //this.setState((prevState) => ({ eventsList: [...prevState.eventsList, singleEvent] }));
+                events.push(singleEvent);
             });
+            events.sort((a,b) => new Date(a.timeStamp ) - new Date(b.timeStamp ))
+            this.setState({ eventsList: events});
         });
     }
 
@@ -57,7 +63,7 @@ class ListEvents extends Component {
     }
     
     render() {
-        //this.state.eventsList.map(el => (console.log(el.participates)));
+        //this.state.eventsList.forEach(element => console.log(element))
         if (this.state.eventsList.length === 0) {
             return (
                 <>
@@ -78,7 +84,7 @@ class ListEvents extends Component {
                                 deleteEvent={this.deleteEvent}
                                 key={singleEvent.eventId}
                                 eventName={singleEvent.eventName}
-                                date={singleEvent.date}
+                                date={`${singleEvent.date} H: ${singleEvent.time}`}
                                 eventPlace={singleEvent.eventPlace}
                                 organizer={singleEvent.organizer}
                                 participates={singleEvent.participates}
