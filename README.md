@@ -1,4 +1,4 @@
-### Order Food Together 
+### Eat Food Together 
 
 React web application allows you to order food together. 
 
