@@ -12,17 +12,17 @@ class JoinModal extends Component {
     
   
     handleClose = () => {
-      this.setState({ show: false, name: '' });
+      this.setState({ show: false, food: '', name: '' });
     }
   
     handleShow = () => {
-      this.setState({ show: true });
+      this.setState({ show: true, food: '', name: '' });
     }
 
     handleSave = (e, eventId) => {
       if(this.state.name.length >= 3) {
-        this.setState({ show: false });
         this.props.addMember(eventId, this.state.name, this.state.food);
+        this.setState({ show: false, food: '', name: '' });
       }      
     }
 

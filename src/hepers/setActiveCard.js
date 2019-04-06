@@ -1,18 +1,15 @@
 // When adding event cards did not switch function below change it.
 
-function setActiveCard() {
+function setActiveCard(card) {
     let cards = document.querySelectorAll('.nav-link');
-    //console.log(cards);
-    cards[1].classList.remove("active");
-    cards[0].classList.add("active");
-
-    // if (cards[0].className.includes('active')) {
-    //     cards[0].classList.remove("active");
-    //     cards[1].classList.add("active");
-    // } else {
-    //     cards[0].classList.add("active");
-    //     cards[1].classList.remove("active");
-    // } 
+    if(card === 'join') {
+        cards.length === 0 ? console.log()  : cards[1].classList.remove("active");
+        cards.length === 0 ? console.log()  : cards[0].classList.add("active");
+    } 
+    if (card === 'create') {
+        cards.length === 0 ? console.log()  : cards[0].classList.remove("active");
+        cards.length === 0 ? console.log()  : cards[1].classList.add("active");
+    }    
 }
 
 export default setActiveCard;

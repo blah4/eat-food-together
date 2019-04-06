@@ -14,7 +14,7 @@ class Navigation extends Component {
                 </Nav.Item>
                 <Nav.Item>
                     <Link to="/create">
-                        <Nav.Link eventKey="create" as="div">Create Evant</Nav.Link>
+                        <Nav.Link eventKey="create" as="div">Create Event</Nav.Link>
                     </Link>
                 </Nav.Item>
             </Nav>

@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import db from '../firebase/config';
 
 import Button from 'react-bootstrap/Button';
-//import setActiveCard from '../hepers/setActiveCard';
+import setActiveCard from '../hepers/setActiveCard';
 
 
 class FormEvent extends Component {
@@ -48,8 +48,8 @@ class FormEvent extends Component {
             ) {
                 this.setState({validated: false});       
             } else {
-                this.setState({validated: true, redirect: true}); 
-
+                setActiveCard('join');
+                this.setState({validated: true, redirect: true});
                 db.collection('events').add({ 
                     eventName: this.state.eventName,
                     date: this.state.eventDate,
@@ -63,13 +63,17 @@ class FormEvent extends Component {
     }
 
     render() {
+        setActiveCard('create');
+
         const year = new Date().getFullYear();
         const mounth = parseInt(new Date().getMonth() + 1 );
         const mounthOnTwoSigns = mounth < 10 ? `0${mounth}`: mounth;
         const day= new Date().getDate();
         const dayOnTwoSigns =  day < 10 ? `0${day}` : day;
         const currentDate = `${year}-${mounthOnTwoSigns}-${dayOnTwoSigns}`;
-        const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
+        const hours = new Date().getHours();
+        const minutes = new Date().getMinutes();
+        const time = `${hours < 10 ? '0'+hours : hours}:${minutes < 10 ? '0'+minutes : minutes}`;
         return (
             <>
                 {this.renderRedirect()}
@@ -92,7 +96,7 @@ class FormEvent extends Component {
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} md >
                             <Form.Label>Event organizer name</Form.Label>
                             <Form.Control 
                                 type="text" 
@@ -109,7 +113,7 @@ class FormEvent extends Component {
                             </Form.Control.Feedback>
                         </Form.Group>
                     
-                        <Form.Group  as={Col}>
+                        <Form.Group  as={Col} md>
                             <Form.Label>What you Will Eat?</Form.Label>
                             <Form.Control 
                                 type="text" 
@@ -145,7 +149,7 @@ class FormEvent extends Component {
                     </Form.Group>                                        
                     
                     <Row>
-                        <Form.Group as={Col} controlId="date">
+                        <Form.Group as={Col} md controlId="date">
                             <Form.Label>Date</Form.Label>
                             <Form.Control
                                 min={currentDate} 
@@ -159,7 +163,7 @@ class FormEvent extends Component {
                             />
                         </Form.Group>
     
-                        <Form.Group as={Col} controlId="time">
+                        <Form.Group as={Col} md controlId="time">
                             <Form.Label>Time</Form.Label>
                             <Form.Control
                                 min={this.state.eventDate === currentDate ? time : null}

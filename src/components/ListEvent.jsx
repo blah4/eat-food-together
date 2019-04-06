@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import db from '../firebase/config';
 
+import setActiveCard from '../hepers/setActiveCard';
 import CardEvent from './CardEvent';
 
 class ListEvents extends Component {
@@ -50,11 +51,11 @@ class ListEvents extends Component {
 
     addMember = (eventId, name, food) => {
         db.collection('events').doc(eventId).update(
-            { participates: firebase.firestore.FieldValue.arrayUnion(`Member ${this.state.name} will eat ${this.state.food}`) }
-          );
+            { participates: firebase.firestore.FieldValue.arrayUnion(`${name} will eat ${food}`) }
+        );
 
         const singleEvent = this.state.eventsList.find((el) => el.eventId === eventId);
-        singleEvent.participates.push(`Member ${name} will eat ${food}`);        
+        singleEvent.participates.push(`${name} will eat ${food}`);        
         
         let newState = this.state.eventsList;
         let index = null;
@@ -70,6 +71,7 @@ class ListEvents extends Component {
     }
     
     render() {
+        setActiveCard('join');
         //this.state.eventsList.forEach(element => console.log(element))
         if (this.state.eventsList.length === 0) {
             return (
