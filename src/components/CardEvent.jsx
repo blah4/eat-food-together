@@ -28,6 +28,8 @@ class CardEvent extends Component {
     }
     
     render() {
+        let hoursToEnd = new Date(this.state.timeToEndEvent).getHours();
+        let minutesToEnd = new Date(this.state.timeToEndEvent).getMinutes();
         return(
             <li id={this.props.uniqueKey}>
                 <Card>
@@ -46,6 +48,8 @@ class CardEvent extends Component {
                                 <Card.Text>{this.props.eventPlace}</Card.Text>
                                 <Card.Subtitle className="mb-2 text-muted">Event starts:</Card.Subtitle>
                                 <Card.Text>{this.props.date}</Card.Text>
+                                <Card.Subtitle className="mb-2" style={{ color: 'red' }}>Time to start:</Card.Subtitle>
+                                <Card.Text>H: {hoursToEnd-1} Min: {minutesToEnd} </Card.Text>
                             </Col>
                             <Col md>   
                                 <Card.Body>
