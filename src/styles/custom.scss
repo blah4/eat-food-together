@@ -29,6 +29,13 @@ body {
     margin: 5px;
   }
 
+  #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+  }
+
   // .test {
   //   box-shadow: 0 2px 30px -1px #ffc90e;
   // }

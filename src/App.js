@@ -25,7 +25,7 @@ class App extends Component {
               <Route path="/events/" component={ListEvents}/>
               <Route path="/create" component={FormEvent}/>
             </Container>    
-        
+            <footer><h3>Maciej B &copy; All rights reserved</h3> </footer>
             {/* <TestContextComponent/> */}
           </ContextProvider>
         </>

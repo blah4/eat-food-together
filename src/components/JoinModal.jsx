@@ -59,7 +59,7 @@ class JoinModal extends Component {
                   />
                 </Form.Group>
                 <Form.Group controlId="foodId">
-                  <Form.Label>What you will be eat?</Form.Label>
+                  <Form.Label>What would you like to eat?</Form.Label>
                   <Form.Control 
                       type="text" 
                       placeholder="Enter what food you will be eat"
